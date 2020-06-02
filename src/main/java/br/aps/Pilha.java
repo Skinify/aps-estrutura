@@ -35,8 +35,8 @@ public class Pilha extends ListaAbstrata{
         No aux = referencial;
 
         while(aux != null){
-            //out += ((Brinquedo) aux.getObject()).getNome() + ";" ; //MOSTRAR ORDEM DE SAIDA
-            out = ((Brinquedo) aux.getObject()).getNome() + ";" + out ; //MOSTRAR ORDEM DE CHEGADA
+            out += ((Brinquedo) aux.getObject()).getNome() + ";" ; //MOSTRAR ORDEM DE SAIDA
+            //out = ((Brinquedo) aux.getObject()).getNome() + ";" + out ; //MOSTRAR ORDEM DE CHEGADA
             aux = aux.getNext();
         }
         out += "\nRestante: " + qtdItens;

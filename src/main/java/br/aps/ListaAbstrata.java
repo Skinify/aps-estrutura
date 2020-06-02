@@ -17,7 +17,6 @@ public abstract class ListaAbstrata {
         referencial = referencial.getNext();
         qtdItens--;
         return aux;
-
     }
 
     public boolean isEmpty(){

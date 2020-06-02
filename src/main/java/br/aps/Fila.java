@@ -1,7 +1,7 @@
 package br.aps;
 
 public class Fila extends ListaAbstrata{
-    
+
     @Override
     public boolean push(Object object){
         if(object.getClass().getSimpleName().equals("Pessoa")){
@@ -41,7 +41,11 @@ public class Fila extends ListaAbstrata{
         No aux = referencial;
 
         while(aux != null){
-            out += ((Pessoa) aux.getObject()).getName() + ";" ;
+            if(((Pessoa) aux.getObject()).getAcompanhante() != null){
+                out += ((Pessoa) aux.getObject()).getName() + " : ganha brinde" + ";" ;
+            }else{
+                out += ((Pessoa) aux.getObject()).getName() + ";" ;
+            }
             aux = aux.getNext();
         }
         out += "\nRestante: " + qtdItens;

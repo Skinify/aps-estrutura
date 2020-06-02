@@ -38,11 +38,12 @@ public final class App {
             pilha.pop();
             System.out.println(pilha.show());
 
+            System.out.println();
+
             System.out.println(fila.show());
             fila.pop();
             System.out.println(fila.show());
-        
-    */
+        */
 
         scanner = new Scanner(System.in).useLocale(new Locale("pt", "BR"));
         System.out.println("Bem vindo\n");
@@ -50,15 +51,12 @@ public final class App {
 
         int opt = 0;
         do{
-            System.out.println("1 - Adicionar pessoas seila");
-            System.out.println("2 - Adicionar brinquedos");
-            System.out.println("3 - Listar pessoas");
-            System.out.println("4 - Listar brinquedos");
-            System.out.println("5 - Remover pessoas");
-            System.out.println("6 - Remover brinquedos");
-            System.out.println("7 - Entregar brinquedos (pega um brinquedo do final da pilha e da pra primeira pessoa da fila)");
-            System.out.println("8 - Ajuda");
-            System.out.println("9 - Sair");
+            System.out.println("1 - Adicionar pessoas na fila");
+            System.out.println("2 - Adicionar brinquedos na pilha");
+            System.out.println("3 - Listar pessoas na fila");
+            System.out.println("4 - Listar brinquedos na pilha");
+            System.out.println("5 - Atender pessoa");
+            System.out.println("6 - Sair");
             try{
                 System.out.print("\n> ");
                 opt = Integer.parseInt(scanner.nextLine());
@@ -71,14 +69,44 @@ public final class App {
                 case 0:{break;}
                 case 1:{
                     String nomePessoa = "";
+                    int idadePessoa;
                     System.out.println("Insira uma pessoa na fila");
-                    System.out.println("Formato: <nomePessoa> ...");
+                    System.out.println("Formato: <nomePessoa> <idadePessoa>");
                     System.out.print("\n> ");
                     try{
                         tokenizer = new StringTokenizer(scanner.nextLine());
                         nomePessoa = tokenizer.nextToken();
-                        fila.push(new Pessoa(nomePessoa));
-                        System.out.println(nomePessoa + "Adicionado(a) a fila");
+                        idadePessoa = Integer.parseInt(tokenizer.nextToken());
+                        if(idadePessoa >= 18){
+                            System.out.println("Há uma criança como acompanhante ?");
+                            System.out.println("0 - Não");
+                            System.out.println("1 - Sim");
+                            switch(Integer.parseInt(scanner.nextLine())){
+                                case 0:{
+                                    fila.push(new Pessoa(nomePessoa, idadePessoa));
+                                    System.out.println(nomePessoa + "Adicionado(a) a fila");
+                                    break;
+                                }
+                                case 1:{
+                                    System.out.println("Por favor insira os dados do acompanhante");
+                                    System.out.println("Formato: <nomePessoa> <idadePessoa>");
+                                    tokenizer = new StringTokenizer(scanner.nextLine());
+                                    String nomeAcompanhante = tokenizer.nextToken();
+                                    int idadeAcompanhante = Integer.parseInt(tokenizer.nextToken());
+                                    if(idadeAcompanhante <= 12){
+                                        fila.push(new Pessoa(nomePessoa, idadePessoa, new Pessoa(nomeAcompanhante, idadeAcompanhante)));
+                                        System.out.println("Acompanhante adicionado");
+                                    }else{
+                                        fila.push(new Pessoa(nomePessoa, idadePessoa));
+                                    }
+                                    System.out.println(nomePessoa + "Adicionado(a) a fila");
+                                    break;
+                                }
+                            }
+
+                        }else{
+                            System.out.println("So pode de maiores muleque");
+                        }
                     }
                     catch(Exception erro){
                         System.out.println("Por favor digite apenas caracteres validos: AZ-az");
@@ -112,26 +140,24 @@ public final class App {
                     break;
                 }
                 case 5:{
+                    Pessoa pessoa = (Pessoa)fila.pop().getObject();
+                    if(pessoa.getAcompanhante() != null){
+                        pilha.pop();
+                    }
                     break;
                 }
                 case 6:{
                     break;
                 }
-                case 7:{
-                    break;
-                }
-                case 8:{
-                    break;
-                }
-                case 9:{break;}
                 default:{
                     System.out.println("Por favor digite apenas algumas das opções a cima\n");
                 }
             }
 
             System.out.println();
-        }while(opt != 9);
+        }while(opt != 6);
         System.out.println("Até logo");
+        
     }
 
 }
