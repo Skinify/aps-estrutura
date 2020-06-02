@@ -78,31 +78,43 @@ public final class App {
                         nomePessoa = tokenizer.nextToken();
                         idadePessoa = Integer.parseInt(tokenizer.nextToken());
                         if(idadePessoa >= 18){
-                            System.out.println("Há uma criança como acompanhante ?");
-                            System.out.println("0 - Não");
-                            System.out.println("1 - Sim");
-                            switch(Integer.parseInt(scanner.nextLine())){
-                                case 0:{
-                                    fila.push(new Pessoa(nomePessoa, idadePessoa));
-                                    System.out.println(nomePessoa + "Adicionado(a) a fila");
-                                    break;
-                                }
-                                case 1:{
-                                    System.out.println("Por favor insira os dados do acompanhante");
-                                    System.out.println("Formato: <nomePessoa> <idadePessoa>");
-                                    tokenizer = new StringTokenizer(scanner.nextLine());
-                                    String nomeAcompanhante = tokenizer.nextToken();
-                                    int idadeAcompanhante = Integer.parseInt(tokenizer.nextToken());
-                                    if(idadeAcompanhante <= 12){
-                                        fila.push(new Pessoa(nomePessoa, idadePessoa, new Pessoa(nomeAcompanhante, idadeAcompanhante)));
-                                        System.out.println("Acompanhante adicionado");
-                                    }else{
-                                        fila.push(new Pessoa(nomePessoa, idadePessoa));
+                            int crianca = 2;
+                            do{
+                                System.out.println("Há uma criança como acompanhante ?");
+                                System.out.println("0 - Não");
+                                System.out.println("1 - Sim");
+                                try{
+                                    crianca = Integer.parseInt(scanner.nextLine());
+                                    switch(crianca){
+                                        case 0:{
+                                            fila.push(new Pessoa(nomePessoa, idadePessoa));
+                                            System.out.println(nomePessoa + "Adicionado(a) a fila");
+                                            break;
+                                        }
+                                        case 1:{
+                                            System.out.println("Por favor insira os dados do acompanhante");
+                                            System.out.println("Formato: <nomePessoa> <idadePessoa>");
+                                                tokenizer = new StringTokenizer(scanner.nextLine());
+                                                String nomeAcompanhante = tokenizer.nextToken();
+                                                int idadeAcompanhante = Integer.parseInt(tokenizer.nextToken());
+                                                if(idadeAcompanhante <= 12){
+                                                    fila.push(new Pessoa(nomePessoa, idadePessoa, new Pessoa(nomeAcompanhante, idadeAcompanhante)));
+                                                    System.out.println("Acompanhante adicionado");
+                                                }else{
+                                                    fila.push(new Pessoa(nomePessoa, idadePessoa));
+                                                }
+                                                System.out.println(nomePessoa + "Adicionado(a) a fila");
+                                            break;
+                                        }
+                                        default:{
+                                            System.out.println("Selecione uma opção");
+                                        }
                                     }
-                                    System.out.println(nomePessoa + "Adicionado(a) a fila");
-                                    break;
                                 }
-                            }
+                                catch(Exception erro){
+                                    System.out.println("Por favor digite apenas caracteres validos: AZ-az");
+                                }
+                            }while(crianca != 0 && crianca !=1);
 
                         }else{
                             System.out.println("So pode de maiores muleque");
