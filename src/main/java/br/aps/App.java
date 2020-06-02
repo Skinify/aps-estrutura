@@ -1,6 +1,8 @@
 package br.aps;
 
 import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.Locale;
 
 /**
  * Hello world!
@@ -10,6 +12,7 @@ public final class App {
     public static Pilha pilha;
     public static Fila fila;
     public static Scanner scanner;
+    public static StringTokenizer tokenizer;
 
     public static void main(String[] args) {
         
@@ -41,7 +44,7 @@ public final class App {
         
     */
 
-        scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in).useLocale(new Locale("pt", "BR"));
         System.out.println("Bem vindo\n");
         System.out.println("Breve explicação sobre o sistema onde vc adiciona pessoas, adiciona brinquedos e depois da um brinquedo pra cada pessoa\n");
 
@@ -49,11 +52,13 @@ public final class App {
         do{
             System.out.println("1 - Adicionar pessoas seila");
             System.out.println("2 - Adicionar brinquedos");
-            System.out.println("3 - Remover pessoas");
-            System.out.println("4 - Remover brinquedos");
-            System.out.println("5 - Entregar brinquedos (pega um brinquedo do final da pilha e da pra primeira pessoa da fila)");
-            System.out.println("6 - Ajuda");
-            System.out.println("7 - Sair");
+            System.out.println("3 - Listar pessoas");
+            System.out.println("4 - Listar brinquedos");
+            System.out.println("5 - Remover pessoas");
+            System.out.println("6 - Remover brinquedos");
+            System.out.println("7 - Entregar brinquedos (pega um brinquedo do final da pilha e da pra primeira pessoa da fila)");
+            System.out.println("8 - Ajuda");
+            System.out.println("9 - Sair");
             try{
                 System.out.print("\n> ");
                 opt = Integer.parseInt(scanner.nextLine());
@@ -63,20 +68,47 @@ public final class App {
             }
 
             switch(opt){
-                case 0:{
-                    //Nao faz nada
-                    break;
-                }
+                case 0:{break;}
                 case 1:{
+                    String nomePessoa = "";
+                    System.out.println("Insira uma pessoa na fila");
+                    System.out.println("Formato: <nomePessoa> ...");
+                    System.out.print("\n> ");
+                    try{
+                        tokenizer = new StringTokenizer(scanner.nextLine());
+                        nomePessoa = tokenizer.nextToken();
+                        fila.push(new Pessoa(nomePessoa));
+                        System.out.println(nomePessoa + "Adicionado(a) a fila");
+                    }
+                    catch(Exception erro){
+                        System.out.println("Por favor digite apenas caracteres validos: AZ-az");
+                    }
                     break;
                 }
                 case 2:{
+                    String nomeBrinquedo = "";
+                    System.out.println("Insira um brinquedo na pilha");
+                    System.out.println("Formato: <nomeBrinquedo> ...");
+                    System.out.print("\n> ");
+                    try{
+                        tokenizer = new StringTokenizer(scanner.nextLine());
+                        nomeBrinquedo = tokenizer.nextToken();
+                        fila.push(new Brinquedo(nomeBrinquedo));
+                        System.out.println(nomeBrinquedo + "Adicionado(a) a pilha");
+                    }
+                    catch(Exception erro){
+                        System.out.println("Por favor digite apenas caracteres validos: AZ-az");
+                    }
+                   
+
                     break;
                 }
                 case 3:{
+                    System.out.println(fila.show());
                     break;
                 }
                 case 4:{
+                    System.out.println(pilha.show());
                     break;
                 }
                 case 5:{
@@ -88,14 +120,18 @@ public final class App {
                 case 7:{
                     break;
                 }
+                case 8:{
+                    break;
+                }
+                case 9:{break;}
                 default:{
                     System.out.println("Por favor digite apenas algumas das opções a cima\n");
                 }
             }
 
             System.out.println();
-        }while(opt != 7);
+        }while(opt != 9);
         System.out.println("Até logo");
-
     }
+
 }

@@ -34,6 +34,9 @@ public class Fila extends ListaAbstrata{
     @Override
     public String show(){
         String out = "";
+        if(qtdItens == 0){
+            return "Não há pessoas na fila";
+        }
 
         No aux = referencial;
 

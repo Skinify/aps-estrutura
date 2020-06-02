@@ -29,7 +29,9 @@ public class Pilha extends ListaAbstrata{
     @Override
     public String show(){
         String out = "";
-
+        if(qtdItens == 0){
+            return "Não há brinquedos na pilha";
+        }
         No aux = referencial;
 
         while(aux != null){
