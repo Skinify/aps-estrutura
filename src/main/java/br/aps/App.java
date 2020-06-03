@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 import java.util.Locale;
 
 /**
- * Teste noelen giovanna
+ * Hello world!
  */
 public final class App {
 
@@ -34,9 +34,8 @@ public final class App {
             System.out.println("4 - Listar brinquedos na pilha");
             System.out.println("5 - Atender pessoa");
             System.out.println("6 - Sair");
-            System.out.print("\n> ");
             try{
-                //System.out.print("\n> ");
+                System.out.print("\n> ");
                 opt = Integer.parseInt(scanner.nextLine());
             }catch(Exception erro){
                 System.out.println("Por favor digite apenas numeros\n");
@@ -75,13 +74,13 @@ public final class App {
                                                 tokenizer = new StringTokenizer(scanner.nextLine());
                                                 String nomeAcompanhante = tokenizer.nextToken();
                                                 int idadeAcompanhante = Integer.parseInt(tokenizer.nextToken());
-                                               /// if(idadeAcompanhante <= 12){
+                                                if(idadeAcompanhante <= 12){
                                                     fila.push(new Pessoa(nomePessoa, idadePessoa, new Pessoa(nomeAcompanhante, idadeAcompanhante)));
                                                     System.out.println("Acompanhante adicionado");
-                                              //  }else{
-                                                 //   fila.push(new Pessoa(nomePessoa, idadePessoa));
-                                              //  }
-                                               // System.out.println(nomePessoa + "Adicionado(a) a fila");
+                                                }else{
+                                                    fila.push(new Pessoa(nomePessoa, idadePessoa));
+                                                }
+                                                System.out.println(nomePessoa + "Adicionado(a) a fila");
                                             break;
                                         }
                                         default:{
@@ -94,7 +93,7 @@ public final class App {
                                 }
                             }while(crianca != 0 && crianca !=1);
                         }else{
-                            System.out.println("Não atendemos crianças desacompanhadas");//alteração
+                            System.out.println("Apenas de maiores ");
                         }
                     }
                     catch(Exception erro){
@@ -129,25 +128,7 @@ public final class App {
                 case 5:{
                     if(!fila.isEmpty()){
                         Pessoa pessoa = (Pessoa) fila.pop().getObject();
-                        if(pessoa.getAcompanhante().equals(null)){
-                            System.out.println("Cliente atendido!");
-                        }else{
-                            if(pessoa.getAcompanhante().getIdade() <= 12){
-                                if(!pilha.isEmpty()){
-                                    pilha.pop();
-                                    System.out.println("Parabéns, seu acompanhante recebe um presente. Feliz dia das crianças!");
-                                }else{
-                                    System.out.println("A pilha de brinquedos está vazia");
-                                }
-                            }else{
-                                System.out.println("Cliente atendido!");
-                            }
-                        }
-                       
-                    }else{
-                        System.out.println("A fila esta vazia");
-                    }
-                          /*  if(pessoa.getAcompanhante() != null){
+                            if(pessoa.getAcompanhante() != null){
                                 if(!pilha.isEmpty()){
                                     pilha.pop();
                                 }else{
@@ -156,7 +137,7 @@ public final class App {
                             }
                     }else{
                         System.out.println("A fila esta vazia");
-                    }*/
+                    }
                     break;
                 }
                 case 6:{
