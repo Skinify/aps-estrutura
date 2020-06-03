@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 import java.util.Locale;
 
 /**
- * Hello world!
+ * Teste 
  */
 public final class App {
 
