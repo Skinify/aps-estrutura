@@ -16,38 +16,15 @@ public final class App {
 
     public static void main(String[] args) {
         
+        scanner = new Scanner(System.in).useLocale(new Locale("pt", "BR"));
         pilha = new Pilha();
         fila = new Fila();
 
-        /*
-            pilha.push(new Brinquedo("brinquedo7"));
-            pilha.push(new Brinquedo("brinquedo4"));
-            pilha.push(new Pessoa("Esta pessoa não entra na pilha"));
-            pilha.push(new Brinquedo("brinquedo312"));
+        for(int cont = 0; cont < 10; cont++){
+            pilha.push(new Brinquedo("Brinquedo - "+ cont));
+        }
 
-
-
-
-            fila.push(new Pessoa("pessoa1"));
-            fila.push(new Brinquedo("Esse brinquedo n entra na fila"));
-            fila.push(new Pessoa("pessoa2"));
-            fila.push(new Pessoa("pessoa3"));
-
-
-            System.out.println(pilha.show());
-            pilha.pop();
-            System.out.println(pilha.show());
-
-            System.out.println();
-
-            System.out.println(fila.show());
-            fila.pop();
-            System.out.println(fila.show());
-        */
-
-        scanner = new Scanner(System.in).useLocale(new Locale("pt", "BR"));
         System.out.println("Bem vindo\n");
-        System.out.println("Breve explicação sobre o sistema onde vc adiciona pessoas, adiciona brinquedos e depois da um brinquedo pra cada pessoa\n");
 
         int opt = 0;
         do{
@@ -115,9 +92,8 @@ public final class App {
                                     System.out.println("Por favor digite apenas caracteres validos: AZ-az");
                                 }
                             }while(crianca != 0 && crianca !=1);
-
                         }else{
-                            System.out.println("So pode de maiores muleque");
+                            System.out.println("Apenas de maiores ");
                         }
                     }
                     catch(Exception erro){
@@ -128,19 +104,17 @@ public final class App {
                 case 2:{
                     String nomeBrinquedo = "";
                     System.out.println("Insira um brinquedo na pilha");
-                    System.out.println("Formato: <nomeBrinquedo> ...");
+                    System.out.println("Formato: <nomeBrinquedo>");
                     System.out.print("\n> ");
                     try{
                         tokenizer = new StringTokenizer(scanner.nextLine());
                         nomeBrinquedo = tokenizer.nextToken();
-                        fila.push(new Brinquedo(nomeBrinquedo));
+                        pilha.push(new Brinquedo(nomeBrinquedo));
                         System.out.println(nomeBrinquedo + "Adicionado(a) a pilha");
                     }
                     catch(Exception erro){
                         System.out.println("Por favor digite apenas caracteres validos: AZ-az");
                     }
-                   
-
                     break;
                 }
                 case 3:{
@@ -152,9 +126,17 @@ public final class App {
                     break;
                 }
                 case 5:{
-                    Pessoa pessoa = (Pessoa)fila.pop().getObject();
-                    if(pessoa.getAcompanhante() != null){
-                        pilha.pop();
+                    if(!fila.isEmpty()){
+                        Pessoa pessoa = (Pessoa) fila.pop().getObject();
+                            if(pessoa.getAcompanhante() != null){
+                                if(!pilha.isEmpty()){
+                                    pilha.pop();
+                                }else{
+                                    System.out.println("A pilha de brinquedos esta vazia");
+                                }
+                            }
+                    }else{
+                        System.out.println("A fila esta vazia");
                     }
                     break;
                 }
