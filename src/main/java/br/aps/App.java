@@ -20,8 +20,8 @@ public final class App {
         pilha = new Pilha();
         fila = new Fila();
 
-        for(int cont = 0; cont < 10; cont++){
-            pilha.push(new Brinquedo("Brinquedo - "+ cont));
+        for(int cont = 0; cont < 4; cont++){
+            pilha.push(new Brinquedo("Brinquedo - "));
         }
 
         System.out.println("Bem vindo\n");
@@ -57,7 +57,7 @@ public final class App {
                         if(idadePessoa >= 18){
                             int crianca = 2;
                             do{
-                                System.out.println("Há uma criança como acompanhante ?");
+                                System.out.println("Há algum dependente?");
                                 System.out.println("0 - Não");
                                 System.out.println("1 - Sim");
                                 try{
@@ -93,7 +93,7 @@ public final class App {
                                 }
                             }while(crianca != 0 && crianca !=1);
                         }else{
-                            System.out.println("Apenas de maiores ");
+                            System.out.println("Não atendemos menores desacompanhados");
                         }
                     }
                     catch(Exception erro){
@@ -131,10 +131,12 @@ public final class App {
                             if(pessoa.getAcompanhante() != null){
                                 if(!pilha.isEmpty()){
                                     pilha.pop();
+                                    System.out.println("Parabéns! Seu acompanhante ganhou um brinde. Feliz dia das crianças!");
                                 }else{
                                     System.out.println("A pilha de brinquedos esta vazia");
                                 }
                             }
+                        System.out.println("Cliente atendido!");
                     }else{
                         System.out.println("A fila esta vazia");
                     }
